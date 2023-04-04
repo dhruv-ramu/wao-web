@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .menu {
+    display: none !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .hiddenForDesktop {
+    display: none !important;
+  }
+}
+
+.left {
+  text-align: left;
+}
+
+.bg-image {
+  background-image: url('/images/Equations.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.bg-image::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.55);
+}

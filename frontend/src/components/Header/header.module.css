@@ -1,0 +1,62 @@
+.headerContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  position: fixed;
+  height: 70px;
+  width: 100%;
+  top: 0;
+  margin-top: 1rem;
+}
+
+.bgContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px;
+}
+
+.bg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: url(/images/Equations.jpg) no-repeat center;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  padding-left: 25px;
+  padding-right: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgOpacityContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .menuItems {
+    display: none !important;
+  }
+  .content {
+    justify-content: space-evenly !important;
+  }
+}

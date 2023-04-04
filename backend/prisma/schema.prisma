@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+enum Roles {
+  Student
+  Teacher
+}
+
+model User {
+  id             String   @id @unique @default(cuid())
+  email          String   @unique
+  password       String
+  name           String
+  role           Roles
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  verifiedHelper Boolean  @default(false)
+  // this is for teachers
+  grades         Grade[]
+  //this is for students
+  grade          Int?
+  section        String?
+
+  subjects       Subject[]
+  answersPerWeek Int?
+  Question       Question[]
+  Upvote         Upvote[]
+  Downvote       Downvote[]
+  Answer         Answer[]
+}
+
+model Grade {
+  id        String     @id @unique @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  User      User[]
+  Question  Question[]
+}
+
+model Subject {
+  id        String     @id @unique @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  User      User?      @relation(fields: [userId], references: [id])
+  userId    String?
+  Question  Question[]
+
+  @@index([userId])
+}
+
+model Question {
+  id        String     @id @unique @default(cuid())
+  title     String     @db.LongText
+  url       String     @unique
+  createdAt DateTime   @default(now())
+  content   String     @db.LongText
+  createdBy User       @relation(fields: [userId], references: [id])
+  userId    String
+  grade     Grade?     @relation(fields: [gradeId], references: [id])
+  subject   Subject?   @relation(fields: [subjectId], references: [id])
+  gradeId   String?
+  subjectId String?
+  upvotes   Upvote[]
+  downvotes Downvote[]
+  Answer    Answer[]
+
+  @@index([userId])
+  @@index([gradeId])
+  @@index([subjectId])
+}
+
+model Upvote {
+  id         String    @id @unique @default(cuid())
+  createdAt  DateTime  @default(now())
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId String?
+  User       User?     @relation(fields: [userId], references: [id])
+  userId     String?
+
+  @@index([questionId])
+  @@index([userId])
+}
+
+model Downvote {
+  id         String    @id @unique @default(cuid())
+  createdAt  DateTime  @default(now())
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId String?
+  User       User?     @relation(fields: [userId], references: [id])
+  userId     String?
+
+  @@index([questionId])
+  @@index([userId])
+}
+
+model Answer {
+  id         String    @id @unique @default(cuid())
+  content    String
+  createdAt  DateTime  @default(now())
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId String?
+  author     User?     @relation(fields: [authorId], references: [id])
+  authorId   String?
+
+  @@index([questionId])
+  @@index([authorId])
+}

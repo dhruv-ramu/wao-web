@@ -1,0 +1,43 @@
+@url = http://localhost:5000
+
+
+###
+POST {{url}}/auth/signup
+Content-Type: application/json
+
+{
+    "email":"test@mail.com",
+    "password":"password@123",
+    "name":"Gurpal Singh",
+    "teacher":true,
+    "grades":["1","2","3","4"],
+    "subjects":["Maths"],
+    "answersPerWeek":2
+}
+
+###
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{
+    "email":"test@mail.com",
+    "password":"password@123"
+}
+
+###
+GET {{url}}/questions
+
+###
+GET {{url}}/questions/testing-stuff-zdBEOfMfR1/
+
+### 
+GET {{url}}/search?take=1
+
+###
+GET {{url}}/search?take=1&subject=PhySics&query=idk
+
+###
+
+GET {{url}}/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsZGJ5Z3VmMzAwMDBld3JveDkxbmNkMGMiLCJpYXQiOjE2Nzg3MTM2NDF9.S1vWoiA5LuKaQQfMM5fN-t2p3tDAIGSFtfHainCqgE0
+
