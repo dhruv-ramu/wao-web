@@ -1,7 +1,4 @@
 # We Are One (WAO)
-## Project Summary
-
-## Work Distribution
 
 ## Build Instructions
 - In the `/backend` folder, first run `pnpm install`, then run `npx prisma db push` and then run `pnpm dev`
